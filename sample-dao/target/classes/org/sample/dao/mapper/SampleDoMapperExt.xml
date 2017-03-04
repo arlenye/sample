@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.sample.dao.mapper.SampleDoMapperExt">
+
+	<sql id="Sample_Column_List">
+		sample_id, sample_name, code, place, date, status
+	</sql>
+
+	<resultMap id="SampleResultMap" type="org.sample.dao.SampleDo">
+		<id column="sample_id" jdbcType="DECIMAL" property="sampleId" />
+		<result column="sample_name" jdbcType="VARCHAR" property="sampleName" />
+		<result column="code" jdbcType="VARCHAR" property="code" />
+		<result column="place" jdbcType="VARCHAR" property="place" />
+		<result column="date" jdbcType="TIMESTAMP" property="date" />
+		<result column="status" jdbcType="VARCHAR" property="status" />
+	</resultMap>
+
+	<select id="selectSamplesByPageCondition" resultMap="SampleResultMap"
+		parameterType="org.sample.common.SampleQuery">
+		select
+		<include refid="Sample_Column_List" />
+		from sample
+		where 1=1
+		<if test="sampleName != null and sampleName != ''">
+			and sample_name LIKE concat('',#{sampleName},'%')
+		</if>
+		<if test="code != null and code != ''">
+			and code LIKE concat('',#{code},'%')
+		</if>
+		<if test="place != null and place != ''">
+			and place LIKE concat('',#{place},'%')
+		</if>
+		<if test="status != null and status != ''">
+			and status = #{status}
+		</if>
+
+		<if test="codeList != null ">
+			<foreach close=" " collection="codeList" item="item" open=" "
+				separator=" ">
+				and code NOT LIKE concat('',#{item},'%')
+			</foreach>
+		</if>
+		<if test="start != null  and pageSize != null ">
+			and sample_id limit #{start},#{pageSize}
+		</if>
+
+	</select>
+
+	<select id="selectLabelKeys" resultType="java.lang.String"
+		parameterType="java.lang.String">
+		select label_key from common_dictionary where dict_type=#{dictTyep}
+	</select>
+	
+	
+	<select id="getTotal" resultType="java.lang.Long">
+		select sum(sample_id) from sample 
+	</select>
+	
+</mapper>

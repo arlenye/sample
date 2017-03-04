@@ -1,0 +1,48 @@
+.combo-button {
+	cursor:			hand;
+	cursor:			pointer;	
+	height:			21px;
+	border:			1px solid;
+	padding:		0;
+	width:			14px;
+	vertical-align:	baseline;
+	font-size:		8pt;
+	font-family:	Webdings, Marlett;
+}
+.combo-hilite {
+	cursor:			hand;
+	cursor:			pointer;
+	border:			1px solid black;
+	color:			black;
+	font-family:	verdana;
+	font-size:		9pt;
+}
+.combo-item   {
+	cursor:			hand;
+	cursor:			pointer;
+	background:		white;
+	border:			1px solid white;
+	color:			black;
+	font-family:	verdana;
+	font-size:		9pt;
+}
+
+.combo-list table {
+	table-layout:	fixed;
+	width:			149px;
+}
+
+.combo-list {
+	border:				1px solid black;
+	background:			white;
+	padding:			1px;
+	width:  			149px;
+	
+	/* enable this if you want scroll bars */
+	height:				200px;
+	overflow:			auto;
+	overflow-x:			visible;
+	overflow-y:			auto;
+}
+
+.selected { background : #C4E1FF; color : white; }

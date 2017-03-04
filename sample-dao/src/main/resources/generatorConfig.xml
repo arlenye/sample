@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
+<generatorConfiguration>
+	<!-- oracle-connector的位置 -->
+	<classPathEntry
+		location="C:\soft\m2\repo\mysql\mysql-connector-java\5.1.37\mysql-connector-java-5.1.37.jar" />
+
+	<!-- 生成dal -->
+	<context id="sample_generate" targetRuntime="MyBatis3">
+
+		<property name="suppressAllComments" value="false" />
+		<property name="useActualColumnNames" value="false" />
+		<!-- 配置插件 -->
+		
+		<!-- 配置数据库连接 -->
+		<jdbcConnection driverClass="com.mysql.jdbc.Driver"
+			connectionURL="jdbc:mysql://localhost:3306/test"
+			userId="root" password="root">
+		</jdbcConnection>
+
+		<javaTypeResolver>
+			<property name="forceBigDecimals" value="false" />
+		</javaTypeResolver>
+
+		<!-- 配置model生成位置 -->
+		<javaModelGenerator targetPackage="org.sample.dao"
+			targetProject="src/main/java">
+			<property name="enableSubPackages" value="true" />
+			<property name="trimStrings" value="true" />
+		</javaModelGenerator>
+
+		<!-- 配置sqlmap生成位置 -->
+		<sqlMapGenerator targetPackage="org.sample.dao.mapper"
+			targetProject="src/main/resources">
+			<property name="enableSubPackages" value="true" />
+		</sqlMapGenerator>
+		
+				<!-- 配置mapper接口生成位置 -->
+		<javaClientGenerator type="XMLMAPPER"
+			targetPackage="org.sample.dao.mapper" targetProject="src/main/java">
+			<property name="enableSubPackages" value="true" />
+		</javaClientGenerator>
+
+		
+		<table tableName="sample" domainObjectName="SampleDo"
+			enableUpdateByExample="false" enableDeleteByExample="false">
+	
+		</table>
+		
+		<table tableName="common_dictionary" domainObjectName="CommonDictionaryDo"
+			enableUpdateByExample="false" enableDeleteByExample="false">
+		</table>
+
+	</context>
+</generatorConfiguration>

@@ -1,0 +1,167 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>我的样本</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="x-pjax-version" content="v173">
+<link rel="apple-touch-icon-precomposed" sizes="144x144"
+	href="ico/favico-144-precomposed.png">
+<link rel="apple-touch-icon-precomposed" sizes="114x114"
+	href="ico/favico-114-precomposed.png">
+<link rel="apple-touch-icon-precomposed" sizes="72x72"
+	href="ico/favico-72-precomposed.png">
+<link rel="apple-touch-icon-precomposed"
+	href="ico/favico-57-precomposed.png">
+<link rel="shortcut icon" href="ico/favico.png">
+<link rel="shortcut icon" href="ico/favico.ico">
+<link rel="stylesheet" href="styles/icon.css" />
+<link rel="stylesheet" href="styles/main.css" />
+<!-- Google-Code代码高亮CSS -->
+<link rel="stylesheet" href="styles/prettify.css" />
+<!-- Ueditor编辑器CSS -->
+<link href="styles/umeditor.min.css" type="text/css" rel="stylesheet">
+
+<link href="css/dzcy.css" type="text/css" rel="stylesheet">
+<link href="css/xcontrol.css" type="text/css" rel="stylesheet">
+
+
+<script type="text/javascript" src="scripts/jquery.min.js">
+	
+</script>
+<script type="text/javascript" src="scripts/basevalue.js">
+	
+</script>
+<!-- 获取Cookie中的uid信息 -->
+<script type="text/javascript" src="scripts/cookie_util.js">
+	
+</script>
+
+<script type="text/javascript" src="scripts/alert.js"></script>
+<script type="text/javascript" src="scripts/sample.js"></script>
+<script type="text/javascript">
+	var page = 1;//要搜索第几页
+	var keyword = "";//搜索关键字条件
+
+	$(function() {//页面载入完毕后
+		//1.加载用户笔记本列表
+		loadSamples(1);
+	});
+</script>
+</head>
+<body class="animated fadeIn">
+	<header class="header">
+
+		<div class="header-profile">
+			<div class="profile-nav">
+				<span class="profile-username"></span> <a class="dropdown-toggle"
+					data-toggle="dropdown"> <span class="fa fa-angle-down"></span>
+				</a>
+				<ul class="dropdown-menu animated flipInX pull-right" role="menu">
+					<li><a href="Change_password.html"><i class="fa fa-user"></i>
+							修改密码</a></li>
+					<li class="divider"></li>
+					<li><a id="logout" href="#"><i class="fa fa-sign-out"></i>
+							退出登录</a></li>
+				</ul>
+			</div>
+		</div>
+		<form class="form-inline" onsubmit="return false;">
+			<button type="button" class="btn btn-default btn-expand-search">
+				<i class="fa fa-search"></i>
+			</button>
+			<div class="toggle-search">
+				<input type="text" class="form-control" placeholder="搜索笔记"
+					id='search_note'>
+				<button type="button" class="btn btn-default btn-collapse-search">
+					<i class="fa fa-times"></i>
+				</button>
+			</div>
+		</form>
+		<ul class="hidden-xs header-menu pull-right">
+			<li><a href="activity.html" target='_blank' title="笔记活动">活动</a>
+			</li>
+		</ul>
+	</header>
+	<div class="row" style='padding: 0;' id='center'>
+		<table class="form_table">
+			<tr>
+				<td>样本名称</td>
+				<td><input type="text" id="sampleName" value="" maxlength="20"
+					caption="样本名称" /></td>
+
+				<td>样本编号</td>
+				<td><input type="text" id="code" value="" maxlength="10"
+					caption="样本编号" notNull /></td>
+				<td>样本地点</td>
+				<td><input type="text" id="place" value="" maxlength="40"
+					caption="样本地点" /></td>
+
+				<td>样本状态</td>
+				<td><input type="text" id="status" value="" maxlength="1"
+					caption="样本状态" /></td>
+			</tr>
+
+		</table>
+		</form>
+		<table class="toolbar_table">
+			<tr>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td align='right'><input type="button" name="querybtn"
+					class="button" value="查询" onClick="loadSamples(1)" /> <input
+					type="button" name="querybtn" class="button" value="重置"
+					onClick="reset()" /></td>
+			</tr>
+		</table>
+		<table id="sampleTable" class="grid_table">
+			
+		</table>
+		<div align='right'>
+			<select id='pageSize' align='right'>
+				<option value="5">每页5条</option>
+				<option value="10">每页10条</option>
+				<option value="15">每页15条</option>
+				<option value="20">每页20条</option>
+			</select>
+		</div>
+	</div>
+	<footer>
+		<p>&copy; 2014 Stilearning</p>
+		<div
+			style='position: absolute; top: 5PX; height: 30px; right: 20px; line-height: 26px; border: 1px solid #0E7D76; display: none; background: #fff'>
+			<strong style='color: #0E7D76; margin: 0 10px;'></strong>
+		</div>
+	</footer>
+
+	<script type="text/javascript" src="scripts/jquery.min.js"></script>
+
+	<!-- Bootstrap框架JS -->
+	<script src="scripts/bootstrap.min.js"></script>
+	<script src="scripts/js-prototype.js"></script>
+	<script src="scripts/theme-setup.js"></script>
+	<!-- Google-Code代码高亮JS -->
+	<script class="re-execute" src="scripts/run_prettify.js"></script>
+	<!-- Ueditor编辑器JS -->
+	<script type="text/javascript" charset="utf-8"
+		src="scripts/ue/umeditor.config.js"></script>
+	<script type="text/javascript" charset="utf-8"
+		src="scripts/ue/umeditor.min.js"></script>
+	<script type="text/javascript" src="scripts/ue/lang/zh-cn.js"></script>
+
+	<script type="text/javascript">
+		//重写JS原生alert函数
+
+		window.alert = function(e) {
+			$('#can').load('./alert/alert_error.html', function() {
+				$('#error_info').text(' ' + e);
+				$('.opacity_bg').show();
+			});
+		}
+
+		//实例化Ueditor编辑器
+		var um = UM.getEditor('myEditor');
+	</script>
+</body>
+</html>
